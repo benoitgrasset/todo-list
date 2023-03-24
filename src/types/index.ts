@@ -6,14 +6,21 @@ export type Todo = {
   state: TodoState;
 };
 
-type ActionType = 'ADD' | 'REMOVE' | 'VALIDATE';
-
 export type State = { todos: Todo[] };
 
-export type Action = {
-  type: ActionType;
-  payload: {
-    text?: string;
-    id?: string;
-  };
+type AddAction = {
+  type: 'ADD';
+  payload: { text: string };
 };
+
+type RemoveAction = {
+  type: 'REMOVE';
+  payload: { id: string };
+};
+
+type ValidateAction = {
+  type: 'VALIDATE';
+  payload: { id: string };
+};
+
+export type Action = AddAction | RemoveAction | ValidateAction;

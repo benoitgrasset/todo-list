@@ -9,23 +9,25 @@ const initialState: State = { todos: [] };
 
 const reducer = (state: State, action: Action): State => {
   const { type, payload } = action;
-  const { text, id } = payload;
   switch (type) {
     case 'ADD':
       const newId = uuidv4();
       const newTodo: Todo = {
         id: newId,
-        text: text || '',
+        text: payload.text,
         state: 'PENDING',
       };
       return { ...state, todos: [newTodo, ...state.todos] };
     case 'REMOVE':
-      return { ...state, todos: state.todos.filter((todo) => todo.id !== id) };
+      return {
+        ...state,
+        todos: state.todos.filter((todo) => todo.id !== payload.id),
+      };
     case 'VALIDATE':
       return {
         ...state,
         todos: state.todos.map((todo) => {
-          if (id === todo.id) return { ...todo, state: 'DONE' };
+          if (payload.id === todo.id) return { ...todo, state: 'DONE' };
           else return todo;
         }),
       };
@@ -63,6 +65,7 @@ const Home: FC = () => {
           placeholder="text"
           value={text}
           onChange={handleTextChange}
+          className={styles.input}
         />
         <button onClick={handleAddTodo} disabled={text.trim().length < 1}>
           <AddIcon />
