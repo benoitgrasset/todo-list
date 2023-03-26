@@ -18,7 +18,7 @@
   border: 1px solid rgb(29 34 36);
   transition: background 200ms, border 200ms;
   background: white;
-  min-width: 350px;
+  min-width: var(--card-width);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -32,7 +32,7 @@
   display: flex;
   gap: 10px;
   margin-bottom: 40px;
-  min-width: 350px;
+  min-width: var(--card-width);
 }
 
 .buttonWrapper {

@@ -18,7 +18,7 @@ const reducer = (state: State, action: Action): State => {
         state: 'PENDING',
       };
       const existingTodo = state.todos.find(
-        (todo) => todo.text.trim() === payload.text
+        (todo) => todo.text.trim() === payload.text.trim()
       );
       if (existingTodo) {
         alert('this todo already exists');
