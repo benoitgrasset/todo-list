@@ -34,7 +34,11 @@ const reducer = (state: State, action: Action): State => {
       return {
         ...state,
         todos: state.todos.map((todo) => {
-          if (payload.id === todo.id) return { ...todo, state: 'DONE' };
+          if (payload.id === todo.id)
+            return {
+              ...todo,
+              state: todo.state === 'PENDING' ? 'DONE' : 'PENDING',
+            };
           else return todo;
         }),
       };
@@ -75,14 +79,18 @@ const Home: FC = () => {
       <div className={styles.inputWrapper}>
         <input
           type="text"
-          placeholder="text"
+          placeholder="Add a todo..."
           value={text}
           onChange={handleTextChange}
           onKeyDown={handleKeyDown}
           className={styles.input}
         />
-        <button onClick={handleClickAdd} disabled={text.trim().length < 1}>
-          <AddIcon />
+        <button
+          onClick={handleClickAdd}
+          disabled={text.trim().length < 1}
+          className={styles.addButton}
+        >
+          <AddIcon color="white" />
         </button>
       </div>
       <div role="list" className={styles.list}>

@@ -18,7 +18,7 @@ const Task: FC<Props> = ({ todo, handleClickValidate, handleClickRemove }) => {
     <div className={clsx(styles.card, { [styles.validated]: isValidated })}>
       <span>{text}</span>
       <div className={styles.buttonWrapper}>
-        <button onClick={handleClickValidate} disabled={isValidated}>
+        <button onClick={handleClickValidate}>
           <CheckIcon color={isValidated ? 'grey' : 'green'} />
         </button>
         <button onClick={handleClickRemove}>

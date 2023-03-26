@@ -31,7 +31,8 @@
 .inputWrapper {
   display: flex;
   gap: 10px;
-  margin-bottom: 20px;
+  margin-bottom: 40px;
+  min-width: 350px;
 }
 
 .buttonWrapper {
@@ -41,6 +42,12 @@
   margin-left: 5px;
 }
 
+.addButton {
+  background: cornflowerblue;
+}
+
 .input {
   padding: 5px;
+  width: 100%;
+  border-radius: var(--border-radius);
 }
