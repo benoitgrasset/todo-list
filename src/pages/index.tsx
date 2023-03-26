@@ -17,6 +17,13 @@ const reducer = (state: State, action: Action): State => {
         text: payload.text,
         state: 'PENDING',
       };
+      const existingTodo = state.todos.find(
+        (todo) => todo.text.trim() === payload.text
+      );
+      if (existingTodo) {
+        alert('this todo already exists');
+        return state;
+      }
       return { ...state, todos: [newTodo, ...state.todos] };
     case 'REMOVE':
       return {
@@ -45,7 +52,13 @@ const Home: FC = () => {
     setText(value);
   };
 
-  const handleAddTodo = () => {
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
+    if (event.key === 'Enter') {
+      handleClickAdd();
+    }
+  };
+
+  const handleClickAdd = () => {
     dispatch({ type: 'ADD', payload: { text } });
   };
 
@@ -65,9 +78,10 @@ const Home: FC = () => {
           placeholder="text"
           value={text}
           onChange={handleTextChange}
+          onKeyDown={handleKeyDown}
           className={styles.input}
         />
-        <button onClick={handleAddTodo} disabled={text.trim().length < 1}>
+        <button onClick={handleClickAdd} disabled={text.trim().length < 1}>
           <AddIcon />
         </button>
       </div>
